@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+        namespace="com.contract.inform.modules.cashflow.dao.CashFlowMapper">
+    <cache-ref
+            namespace="com.contract.inform.modules.cashflow.dao.CashFlowMapper" />
+    <insert id="insertCashFlowList" useGeneratedKeys="true"
+            parameterType="java.util.List">
+        INSERT INTO cash_flow(project_number,
+        stage,
+        income,
+        cumulate_income,
+        outcome,
+        cumulate_outcome,
+        stage_cash_flow,
+        cumulate_cash_flow)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.projectNumber},
+            #{item.stage},
+            #{item.income},
+            #{item.cumulateIncome},
+            #{item.outcome},
+            #{item.cumulateOutcome},
+            #{item.stageCashFlow},
+            #{item.cumulateCashFLow}
+            )
+        </foreach>
+    </insert>
+</mapper>

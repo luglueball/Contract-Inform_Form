@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+        namespace="com.contract.inform.modules.history.dao.HistoryMapper">
+    <cache-ref
+            namespace="com.contract.inform.modules.history.dao.HistoryMapper" />
+
+    <select id="queryHistoryByProjectNumber"
+            resultType="com.contract.inform.modules.history.entity.IncomeOutcomeHistory">
+        select *
+        from income_outcome_history
+        where
+        project_number = #{projectNumber}
+    </select>
+
+
+</mapper>

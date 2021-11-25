@@ -11,7 +11,7 @@
         select *
         from contract
         where
-        project_number = #{projectNumber}
+        version = (select max(version) from contract where project_number = #{projectNumber})
     </select>
 
     <select id="listContract"

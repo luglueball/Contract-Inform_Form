@@ -29,4 +29,13 @@
             )
         </foreach>
     </insert>
+
+    <select id="getCashFlowByProjectNumber"
+            resultType="com.contract.inform.modules.cashflow.entity.CashFlow">
+        SELECT *
+        FROM cash_flow
+        WHERE
+            project_number=#{projectNumber}
+        ORDER BY stage DESC
+    </select>
 </mapper>

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 @Data
 @TableName("contract")
@@ -14,13 +13,13 @@ public class Contract implements Serializable {
     private int version;
     private String projectName;
     private String projectShorterName;
-    private float contractAmountTotal;
+    private float contractAmountTotal;     //合同总金额
     private float contractAmountBuild;
     private float contractAmountEquip;
     private float incomeAmountTotal;
     private float incomeAmountBuild;
     private float incomeAmountEquip;
-    private float costAmountTotal;
+    private float costAmountTotal;        //预计总成本
     private float costAmountBuild;
     private float costAmountEquip;
     private float profit;

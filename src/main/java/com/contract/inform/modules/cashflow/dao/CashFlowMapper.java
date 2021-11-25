@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.contract.inform.modules.cashflow.entity.CashFlow;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface CashFlowMapper extends BaseMapper<CashFlow> {
     @Select("SELECT count(*) FROM cash_flow WHERE project_number = #{projectNumber}")
     int queryByProjectNumber(String projectNumber);
 
-    void deleteByMap();
-
     void insertCashFlowList(List<CashFlow> cashFlowList);
+
+    List<CashFlow> getCashFlowByProjectNumber(@Param("projectNumber")String projectNumber);
 }

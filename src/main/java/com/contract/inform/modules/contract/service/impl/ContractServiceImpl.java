@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,6 +31,13 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         Page<Contract> page = new Page<>(currPage, pageSize);
         IPage<Contract> contractList = contractMapper.listContract(page,projectName);
         return contractList;
+    }
+
+    @Override
+    public List<String> listProjectName(Map<String, Object> params) {
+        String projectName = (String) params.get("projectName");
+        List<String> projectNames = contractMapper.listProjectName(projectName);
+        return projectNames;
     }
 
     @Override

@@ -14,6 +14,14 @@
         version = (select max(version) from contract where project_number = #{projectNumber})
     </select>
 
+    <select id="listProjectName"
+            resultType="String">
+        select distinct (project_name)
+        from contract
+        where 1=1
+        <if test="projectName != '' and projectName != null">AND project_name LIKE "%"#{projectName}"%" </if>
+    </select>
+
     <select id="listContract"
             resultType="com.contract.inform.modules.contract.entity.Contract">
     select *

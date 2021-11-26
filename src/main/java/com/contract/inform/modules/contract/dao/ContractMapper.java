@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 @CacheNamespace(flushInterval = 300000L)//缓存五分钟过期
 public interface ContractMapper extends BaseMapper<Contract> {
@@ -17,4 +19,6 @@ public interface ContractMapper extends BaseMapper<Contract> {
     Contract queryByProjectNumber(@Param("projectNumber")String projectNumber);
 
     IPage<Contract> listContract(@Param("page")Page<Contract> page, @Param("projectName")String projectName);
+
+    List<String> listProjectName(@Param("projectName")String projectName);
 }

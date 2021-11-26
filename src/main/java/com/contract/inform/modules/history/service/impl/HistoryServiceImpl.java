@@ -32,8 +32,7 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
 
     @Override
     public ProjectHistoryView getHistoryByProjectNumber(String projectNumber) {
-        ProjectHistoryView projectHistoryView = new ProjectHistoryView();
-        IncomeOutcomeHistory queryResult = historyMapper.queryHistoryByProjectNumber(projectNumber);
+        ProjectHistoryView projectHistoryView = historyMapper.queryProjectHistory(projectNumber);
         return projectHistoryView;
     }
 

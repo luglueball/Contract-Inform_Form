@@ -14,7 +14,10 @@ public class IncomeOutcomeHistory implements Serializable {
     private float currentTwoAmount;
     private float unfinishedConstructionFee;
     private float accountsReceivable;
+    private float accumulatedActualCharges;
     private float currentCharge;
+    private float accumulatedActualPayment;
+    private float currentPayment;
     private float profitDeviation;
     private int settlementRevenueProportion;
     private int actualChargeProportion;

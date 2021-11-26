@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.contract.inform.modules.history.entity.IncomeOutcomeHistory;
+import com.contract.inform.modules.history.form.ProjectHistoryView;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,5 +14,7 @@ public interface HistoryMapper extends BaseMapper<IncomeOutcomeHistory> {
 
     IPage<IncomeOutcomeHistory> listHistory(Page<IncomeOutcomeHistory> page, String projectName);
 
-    IncomeOutcomeHistory queryHistoryByProjectNumber(String projectNumber);
+    ProjectHistoryView queryHistoryByProjectNumber(String projectNumber);
+
+    ProjectHistoryView queryProjectHistory(String projectNumber);
 }

@@ -12,6 +12,7 @@
         from contract
         where
         version = (select max(version) from contract where project_number = #{projectNumber})
+        and project_number = #{projectNumber}
     </select>
 
     <select id="listProjectName"

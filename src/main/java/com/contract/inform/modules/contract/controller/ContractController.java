@@ -4,6 +4,7 @@ package com.contract.inform.modules.contract.controller;
 import com.contract.inform.common.utils.PageUtils;
 import com.contract.inform.common.utils.R;
 import com.contract.inform.modules.contract.entity.Contract;
+import com.contract.inform.modules.contract.form.ContractBase;
 import com.contract.inform.modules.contract.service.ContractService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ContractController {
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = new PageUtils(contractService.queryPage(params));
 
-        return R.ok().put("page", page);
+        return R.ok().put("data", page);
     }
 
     /**
@@ -43,9 +44,9 @@ public class ContractController {
     @GetMapping("/listProjectName")
 //    @RequiresPermissions("")
     public R listProjectName(@RequestParam Map<String, Object> params) {
-        List<String> projectNames = contractService.listProjectName(params);
+        List<ContractBase> data = contractService.listProjectName(params);
 
-        return R.ok().put("projectNames", projectNames);
+        return R.ok().put("data", data);
     }
 
 }

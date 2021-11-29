@@ -16,12 +16,15 @@ public class Contract implements Serializable {
     private float contractAmountTotal;     //合同总金额
     private float contractAmountBuild;
     private float contractAmountEquip;
+    private float contractAmountOther;
     private float incomeAmountTotal;
     private float incomeAmountBuild;
     private float incomeAmountEquip;
+    private float incomeAmountOther;
     private float costAmountTotal;        //预计总成本
     private float costAmountBuild;
     private float costAmountEquip;
+    private float costAmountOther;
     private float profit;
     private String createTime;
 }

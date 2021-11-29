@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.contract.inform.modules.contract.dao.ContractMapper;
 import com.contract.inform.modules.contract.entity.Contract;
+import com.contract.inform.modules.contract.form.ContractBase;
 import com.contract.inform.modules.contract.service.ContractService;
 import lombok.RequiredArgsConstructor;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
@@ -34,9 +35,9 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
     }
 
     @Override
-    public List<String> listProjectName(Map<String, Object> params) {
+    public List<ContractBase> listProjectName(Map<String, Object> params) {
         String projectName = (String) params.get("projectName");
-        List<String> projectNames = contractMapper.listProjectName(projectName);
+        List<ContractBase> projectNames = contractMapper.listProjectName(projectName);
         return projectNames;
     }
 

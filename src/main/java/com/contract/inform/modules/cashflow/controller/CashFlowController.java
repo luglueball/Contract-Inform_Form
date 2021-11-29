@@ -33,6 +33,6 @@ public class CashFlowController {
 //    @RequiresPermissions("")
     public R getCashByContract(@RequestBody String projectNumber) {
         ContractCashView contractCashView = cashFlowService.getCashByContract(projectNumber);
-        return R.ok().put("ContractCashView", contractCashView);
+        return R.ok().put("data", contractCashView);
     }
 }

@@ -15,10 +15,11 @@
     </select>
 
     <select id="listProjectName"
-            resultType="String">
-        select distinct (project_name)
+            resultType="com.contract.inform.modules.contract.form.ContractBase">
+        select *
         from contract
-        where 1=1
+        where
+        (project_number, version) IN (SELECT project_number, MAX(version) FROM contract group by project_number)
         <if test="projectName != '' and projectName != null">AND project_name LIKE "%"#{projectName}"%" </if>
     </select>
 

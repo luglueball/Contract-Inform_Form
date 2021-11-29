@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.contract.inform.modules.contract.entity.Contract;
+import com.contract.inform.modules.contract.form.ContractBase;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,5 +21,5 @@ public interface ContractMapper extends BaseMapper<Contract> {
 
     IPage<Contract> listContract(@Param("page")Page<Contract> page, @Param("projectName")String projectName);
 
-    List<String> listProjectName(@Param("projectName")String projectName);
+    List<ContractBase> listProjectName(@Param("projectName")String projectName);
 }

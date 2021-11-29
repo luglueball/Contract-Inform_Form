@@ -26,7 +26,7 @@ public class HistoryController {
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = new PageUtils(historyService.queryPage(params));
 
-        return R.ok().put("page", page);
+        return R.ok().put("data", page);
     }
     /**
      获取历史记录详情
@@ -35,7 +35,7 @@ public class HistoryController {
 //    @RequiresPermissions("")
     public R getHistoryByProjectNumber(@RequestBody String projectNumber) {
         ProjectHistoryView ProjectHistoryDetail = historyService.getHistoryByProjectNumber(projectNumber);
-        return R.ok().put("history", ProjectHistoryDetail);
+        return R.ok().put("data", ProjectHistoryDetail);
     }
 
     /**

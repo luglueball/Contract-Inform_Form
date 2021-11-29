@@ -10,16 +10,16 @@ import java.io.Serializable;
 public class IncomeOutcomeHistory implements Serializable {
     private static final long serialVersionUID = 1L;
     private String projectNumber;
-    private float accumulatedRevenue;
-    private float currentTwoAmount;
-    private float unfinishedConstructionFee;
-    private float accountsReceivable;
-    private float accumulatedActualCharges;
-    private float currentCharge;
-    private float accumulatedActualPayment;
-    private float currentPayment;
-    private float profitDeviation;
-    private int settlementRevenueProportion;
-    private int actualChargeProportion;
-    private int actualPaymentProportion;
+    private float accumulatedRevenue;         //累计营收
+    private float currentTwoAmount;           //当期两金
+    private float unfinishedConstructionFee;  //未完施工
+    private float accountsReceivable;         //应收账款
+    private float accumulatedActualCharges;   //累计实际收费
+    private float currentCharge;              //当期收费
+    private float accumulatedActualPayment;   //累计实际付费
+    private float currentPayment;             //当期付费
+    private float profitDeviation;            //利润偏差
+    private int settlementRevenueProportion;  //结转营收比例
+    private int actualChargeProportion;       //实际收费比例
+    private int actualPaymentProportion;      //实际付费比例
 }

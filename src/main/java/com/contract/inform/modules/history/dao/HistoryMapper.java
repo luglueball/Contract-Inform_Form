@@ -14,7 +14,9 @@ public interface HistoryMapper extends BaseMapper<IncomeOutcomeHistory> {
 
     IPage<IncomeOutcomeHistory> listHistory(Page<IncomeOutcomeHistory> page, String projectName);
 
-    ProjectHistoryView queryHistoryByProjectNumber(String projectNumber);
+    IncomeOutcomeHistory queryHistoryByProjectNumber(String projectNumber);
 
     ProjectHistoryView queryProjectHistory(String projectNumber);
+
+    void updateByProject(IncomeOutcomeHistory incomeOutcomeHistory);
 }

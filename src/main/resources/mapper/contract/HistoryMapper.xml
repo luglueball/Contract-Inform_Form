@@ -28,4 +28,25 @@
     where
     project_number = #{projectNumber}
     </select>
+
+    <update id="updateByProject"
+            parameterType="com.contract.inform.modules.history.entity.IncomeOutcomeHistory">
+        update income_outcome_history
+        <set>
+            <if test="accumulatedRevenue != null">accumulated_revenue = #{accumulatedRevenue},</if>
+            <if test="currentTwoAmount != null">current_two_amount = #{currentTwoAmount},</if>
+            <if test="unfinishedConstructionFee != null">unfinished_construction_fee = #{unfinishedConstructionFee},</if>
+            <if test="accountsReceivable != null">accounts_receivable = #{accountsReceivable},</if>
+            <if test="accumulatedActualCharges != null">accumulated_actual_charges = #{accumulatedActualCharges},</if>
+            <if test="currentCharge != null">current_charge = #{currentCharge},</if>
+            <if test="accumulatedActualPayment != null">accumulated_actual_payment = #{accumulatedActualPayment},</if>
+            <if test="currentPayment != null">current_payment = #{currentPayment},</if>
+            <if test="profitDeviation != null">profit_deviation = #{profitDeviation},</if>
+            <if test="settlementRevenueProportion != null">settlement_revenue_proportion = #{settlementRevenueProportion},</if>
+            <if test="actualChargeProportion != null">actual_charge_proportion = #{actualChargeProportion},</if>
+            <if test="actualPaymentProportion != null">actual_payment_proportion = #{actualPaymentProportion}</if>
+        </set>
+        where
+            project_number = #{projectNumber}
+    </update>
 </mapper>

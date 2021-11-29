@@ -41,6 +41,8 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
         IncomeOutcomeHistory queryResult = historyMapper.queryHistoryByProjectNumber(incomeOutcomeHistory.getProjectNumber());
         if (queryResult == null ) {
             historyMapper.insert(incomeOutcomeHistory);
+        } else {
+            historyMapper.updateByProject(incomeOutcomeHistory);
         }
         return false;
     }

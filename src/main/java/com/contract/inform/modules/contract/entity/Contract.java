@@ -17,7 +17,7 @@ public class Contract implements Serializable {
     private float contractAmountBuild;
     private float contractAmountEquip;
     private float contractAmountOther;
-    private float incomeAmountTotal;
+    private float incomeAmountTotal;      //预计总收入
     private float incomeAmountBuild;
     private float incomeAmountEquip;
     private float incomeAmountOther;

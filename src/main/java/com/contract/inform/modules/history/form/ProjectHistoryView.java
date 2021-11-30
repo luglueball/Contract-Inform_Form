@@ -5,6 +5,7 @@ import com.contract.inform.modules.history.entity.IncomeOutcomeHistory;
 public class ProjectHistoryView extends IncomeOutcomeHistory {
     private String projectName;
     private float contractAmountTotal;
+    private float incomeAmountTotal;
 
     public String getProjectName() {
         return projectName;
@@ -30,5 +31,4 @@ public class ProjectHistoryView extends IncomeOutcomeHistory {
         this.incomeAmountTotal = incomeAmountTotal;
     }
 
-    private float incomeAmountTotal;
 }

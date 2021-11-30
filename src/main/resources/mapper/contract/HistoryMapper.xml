@@ -6,6 +6,21 @@
     <cache-ref
             namespace="com.contract.inform.modules.history.dao.HistoryMapper" />
 
+    <select id="listHistory"
+            resultType="com.contract.inform.modules.history.form.ProjectHistoryView">
+        SELECT *
+        FROM contract c
+                 left join income_outcome_history i
+                           on c.project_number = i.project_number
+        where
+                (c.project_number, version)
+                IN
+                (SELECT c.project_number, MAX(version)
+                 FROM  contract c
+                 group by c.project_number)
+        <if test="projectName != '' and projectName != null">AND project_name LIKE "%"#{projectName}"%" </if>
+    </select>
+
     <select id="queryProjectHistory"
             resultType="com.contract.inform.modules.history.form.ProjectHistoryView">
         SELECT *
@@ -16,7 +31,7 @@
         (c.project_number, version)
         IN
             (SELECT c.project_number, MAX(version)
-            FROM contract_inform_form.contract c
+            FROM contract c
             group by c.project_number)
         AND c.project_number = #{projectNumber}
     </select>

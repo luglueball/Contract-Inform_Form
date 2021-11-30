@@ -21,12 +21,12 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
     HistoryMapper historyMapper;
 
     @Override
-    public IPage<IncomeOutcomeHistory> queryPage(Map<String, Object> params) {
+    public IPage<ProjectHistoryView> queryPage(Map<String, Object> params) {
         long currPage = Long.valueOf((String) params.get("currPage"));
         long pageSize = Long.valueOf((String) params.get("pageSize"));
         String projectName = (String) params.get("projectName");
-        Page<IncomeOutcomeHistory> page = new Page<>(currPage, pageSize);
-        IPage<IncomeOutcomeHistory> contractList = historyMapper.listHistory(page,projectName);
+        Page<ProjectHistoryView> page = new Page<>(currPage, pageSize);
+        IPage<ProjectHistoryView> contractList = historyMapper.listHistory(page,projectName);
         return contractList;
     }
 

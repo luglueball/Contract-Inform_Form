@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -38,8 +40,14 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
 
     @Override
     public boolean save(IncomeOutcomeHistory incomeOutcomeHistory) {
-        IncomeOutcomeHistory queryResult = historyMapper.queryHistoryByProjectNumber(incomeOutcomeHistory.getProjectNumber());
+        IncomeOutcomeHistory queryResult =
+                historyMapper.queryHistoryByProjectNumber(incomeOutcomeHistory.getProjectNumber(),
+                        incomeOutcomeHistory.getStage());
         if (queryResult == null ) {
+            Date d = new Date();
+            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String createTime = dateformat.format(d);
+            incomeOutcomeHistory.setStage(createTime.substring(0,7));
             historyMapper.insert(incomeOutcomeHistory);
         } else {
             historyMapper.updateByProject(incomeOutcomeHistory);

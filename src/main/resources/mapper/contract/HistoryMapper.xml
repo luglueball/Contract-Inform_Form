@@ -41,7 +41,8 @@
     select *
     from income_outcome_history
     where
-    project_number = #{projectNumber}
+    project_number = #{projectNumber} and
+    stage = #{stage}
     </select>
 
     <update id="updateByProject"
@@ -62,6 +63,7 @@
             <if test="actualPaymentProportion != null">actual_payment_proportion = #{actualPaymentProportion}</if>
         </set>
         where
-            project_number = #{projectNumber}
+            project_number = #{projectNumber} and
+            stage = #{stage}
     </update>
 </mapper>

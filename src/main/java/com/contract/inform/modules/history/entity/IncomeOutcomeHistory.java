@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class IncomeOutcomeHistory implements Serializable {
     private static final long serialVersionUID = 1L;
     private String projectNumber;
+    private String stage;                     //年月
     private float accumulatedRevenue;         //累计营收
     private float currentTwoAmount;           //当期两金
     private float unfinishedConstructionFee;  //未完施工

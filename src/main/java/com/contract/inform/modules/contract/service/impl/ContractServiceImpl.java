@@ -57,6 +57,7 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
             contract.setCreateTime(createTime);
             IncomeOutcomeHistory incomeOutcomeHistory = new IncomeOutcomeHistory();
             incomeOutcomeHistory.setProjectNumber(contract.getProjectNumber());
+            incomeOutcomeHistory.setStage(createTime.substring(0,7));
             historyService.save(incomeOutcomeHistory);
         }
         contractMapper.insert(contract);

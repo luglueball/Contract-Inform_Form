@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+        namespace="com.contract.inform.modules.sumtable.dao.SumtableMapper">
+    <cache-ref
+            namespace="com.contract.inform.modules.sumtable.dao.SumtableMapper" />
+    <update id="updateSumtable"
+            parameterType="com.contract.inform.modules.sumtable.entity.SumtableInputs">
+        update sum_table_inputs
+        <set>
+            <if test="paymentBeforeRemittance != null">payment_before_remittance = #{paymentBeforeRemittance},</if>
+            <if test="paymentAfterRemittance != null">payment_after_remittance = #{paymentAfterRemittance},</if>
+            <if test="unplannedCharges != null">unplanned_charges = #{unplannedCharges},</if>
+            <if test="unplannedPayment != null">unplanned_payment = #{unplannedPayment},</if>
+            <if test="currentPlannedPayment != null">current_planned_payment = #{currentPlannedPayment}</if>
+        </set>
+        where
+            project_number = #{projectNumber}
+    </update>
+
+    <select id="querySumByProjectNumber"
+            resultType="com.contract.inform.modules.sumtable.entity.SumtableInputs">
+        select *
+        from sum_table_inputs
+        where
+            project_number = #{projectNumber}
+    </select>
+</mapper>

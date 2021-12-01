@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.contract.inform.modules.history.form.ProjectHistoryView;
 import com.contract.inform.modules.sumtable.entity.SumtableInputs;
-import com.contract.inform.modules.sumtable.mapper.SumtableMapper;
+import com.contract.inform.modules.sumtable.dao.SumtableMapper;
 import com.contract.inform.modules.sumtable.service.SumtableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,12 @@ public class SumtableServiceImpl extends ServiceImpl<SumtableMapper, SumtableInp
 
     @Override
     public boolean save(SumtableInputs sumtableInputs) {
-        sumtableMapper.insert(sumtableInputs);
+        SumtableInputs sumtableInputsSelected = sumtableMapper.querySumByProjectNumber(sumtableInputs.getProjectNumber());
+        if (sumtableInputsSelected == null) {
+            sumtableMapper.insert(sumtableInputs);
+        } else {
+            sumtableMapper.updateSumtable(sumtableInputs);
+        }
         return false;
     }
 

@@ -7,14 +7,12 @@ import com.contract.inform.modules.contract.dao.ContractMapper;
 import com.contract.inform.modules.contract.entity.Contract;
 import com.contract.inform.modules.contract.form.ContractBase;
 import com.contract.inform.modules.contract.service.ContractService;
+import com.contract.inform.modules.history.entity.IncomeOutcomeHistory;
+import com.contract.inform.modules.history.service.HistoryService;
 import lombok.RequiredArgsConstructor;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +22,9 @@ import java.util.Map;
 public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> implements ContractService {
     @Autowired
     private ContractMapper contractMapper;
+    @Autowired
+    private HistoryService historyService;
+
     @Override
     public IPage<Contract> queryPage(Map<String, Object> params) {
         long currPage = Long.valueOf((String) params.get("currPage"));
@@ -54,6 +55,9 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
             String createTime = dateformat.format(d);
             contract.setVersion(1);
             contract.setCreateTime(createTime);
+            IncomeOutcomeHistory incomeOutcomeHistory = new IncomeOutcomeHistory();
+            incomeOutcomeHistory.setProjectNumber(contract.getProjectNumber());
+            historyService.save(incomeOutcomeHistory);
         }
         contractMapper.insert(contract);
         return false;

@@ -6,6 +6,7 @@ import com.contract.inform.common.utils.R;
 import com.contract.inform.modules.contract.entity.Contract;
 import com.contract.inform.modules.contract.form.ContractBase;
 import com.contract.inform.modules.contract.service.ContractService;
+import com.contract.inform.modules.history.service.HistoryService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

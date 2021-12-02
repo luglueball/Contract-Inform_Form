@@ -3,7 +3,7 @@ package com.contract.inform.modules.cashflow.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.contract.inform.modules.cashflow.dao.CashFlowMapper;
 import com.contract.inform.modules.cashflow.entity.CashFlow;
-import com.contract.inform.modules.cashflow.entity.ContractCashView;
+import com.contract.inform.modules.cashflow.form.ContractCashView;
 import com.contract.inform.modules.cashflow.form.CashFlowForm;
 import com.contract.inform.modules.cashflow.service.CashFlowService;
 import com.contract.inform.modules.contract.dao.ContractMapper;

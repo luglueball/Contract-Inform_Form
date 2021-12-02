@@ -19,6 +19,7 @@
                  FROM  contract c
                  group by c.project_number)
         <if test="projectName != '' and projectName != null">AND project_name LIKE "%"#{projectName}"%" </if>
+        <if test="stage != '' and stage != null">AND stage = #{stage} </if>
     </select>
 
     <select id="queryProjectHistory"

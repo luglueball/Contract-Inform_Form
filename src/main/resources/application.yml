@@ -8,7 +8,7 @@ server:
     context-path: /
 spring:
   profiles:
-    active: dev
+    active: prod
 ---
 spring:
   profiles: dev
@@ -52,7 +52,7 @@ spring:
     name: ownDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/contract_inform_form?zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://47.105.93.81:3306/contract_inform_form?zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: Twelve12
       initial-size: 1                     #连接池初始大小

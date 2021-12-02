@@ -27,8 +27,14 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
         long currPage = Long.valueOf((String) params.get("currPage"));
         long pageSize = Long.valueOf((String) params.get("pageSize"));
         String projectName = (String) params.get("projectName");
+        String stage = (String) params.get("stage");
+        if (stage == null || stage == "") {
+            Date d = new Date();
+            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            stage = dateformat.format(d).substring(0,7);
+        }
         Page<ProjectHistoryView> page = new Page<>(currPage, pageSize);
-        IPage<ProjectHistoryView> contractList = historyMapper.listHistory(page,projectName);
+        IPage<ProjectHistoryView> contractList = historyMapper.listHistory(page,projectName,stage);
         return contractList;
     }
 

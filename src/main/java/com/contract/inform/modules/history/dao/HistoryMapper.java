@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
 @CacheNamespace(flushInterval = 300000L)//缓存五分钟过期
 public interface HistoryMapper extends BaseMapper<IncomeOutcomeHistory> {
 
-    IPage<ProjectHistoryView> listHistory(Page<ProjectHistoryView> page, String projectName);
+    IPage<ProjectHistoryView> listHistory(Page<ProjectHistoryView> page, String projectName, String stage);
 
     IncomeOutcomeHistory queryHistoryByProjectNumber(String projectNumber, String stage);
 

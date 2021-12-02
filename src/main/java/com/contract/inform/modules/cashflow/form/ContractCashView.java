@@ -1,5 +1,6 @@
-package com.contract.inform.modules.cashflow.entity;
+package com.contract.inform.modules.cashflow.form;
 
+import com.contract.inform.modules.cashflow.entity.CashFlow;
 import com.contract.inform.modules.contract.entity.Contract;
 import java.util.List;
 

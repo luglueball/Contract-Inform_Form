@@ -2,7 +2,7 @@ package com.contract.inform.modules.cashflow.controller;
 
 
 import com.contract.inform.common.utils.R;
-import com.contract.inform.modules.cashflow.entity.ContractCashView;
+import com.contract.inform.modules.cashflow.form.ContractCashView;
 import com.contract.inform.modules.cashflow.form.CashFlowForm;
 import com.contract.inform.modules.cashflow.service.CashFlowService;
 import io.swagger.annotations.Api;

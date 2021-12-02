@@ -26,4 +26,42 @@
         where
             project_number = #{projectNumber}
     </select>
+
+    <select id="listProjectSum"
+            resultType="com.contract.inform.modules.sumtable.form.ProjectSumView">
+        SELECT
+            c.project_number as projectNumber,
+            c.project_name as projectName,
+            st.stage as stage,
+            st.agency as agency,
+            h.accumulated_actual_charges as accumulatedActualCharges,
+            h.accumulated_actual_payment as accumulatedActualPayment,
+            h.settlement_revenue_proportion as settlementRevenueProportion,
+            st.project_image_progress as projectImageProgress,
+            h.actual_charge_proportion as actualChargeProportion,
+            h.profit_deviation as profitDeviation,
+            cf.cumulate_income as cumulateIncome,
+            h.current_two_amount as currentTwoAmount,
+            (h.current_two_amount+st.current_planned_payment+
+              st.unplanned_payment-st.unplanned_charges-cf.cumulate_income+
+              h.accumulated_actual_charges) as balanceOfCurrentTwoAmount,
+            cf.cumulate_income-h.accumulated_actual_charges as currentPlannedCharge,
+           st.current_planned_payment as currentPlannedPayment,
+           st.payment_before_remittance as paymentBeforeRemittance,
+           st.payment_after_remittance as paymentAfterRemittance,
+           st.unplanned_charges  as unplannedCharges,
+           st.unplanned_payment   as unplannedPayment
+        FROM contract c
+        left join sum_table_inputs st on c.project_number = st.project_number
+        left join cash_flow cf on c.project_number = cf.project_number and st.stage = cf.stage
+        left join income_outcome_history h on c.project_number = h.project_number and st.stage = h.stage
+        where
+            (c.project_number, version)
+             IN
+            (SELECT c.project_number, MAX(version)
+            FROM contract c
+            group by c.project_number)
+        <if test="projectName != '' and projectName != null">AND project_name LIKE "%"#{projectName}"%" </if>
+        <if test="stage != '' and stage != null">AND cf.stage = #{stage} </if>
+    </select>
 </mapper>

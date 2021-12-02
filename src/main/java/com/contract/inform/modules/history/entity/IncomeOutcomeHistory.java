@@ -20,7 +20,7 @@ public class IncomeOutcomeHistory implements Serializable {
     private float accumulatedActualPayment;   //累计实际付费
     private float currentPayment;             //当期付费
     private float profitDeviation;            //利润偏差
-    private int settlementRevenueProportion;  //结转营收比例
-    private int actualChargeProportion;       //实际收费比例
-    private int actualPaymentProportion;      //实际付费比例
+    private float settlementRevenueProportion;  //结转营收比例
+    private float actualChargeProportion;       //实际收费比例
+    private float actualPaymentProportion;      //实际付费比例
 }

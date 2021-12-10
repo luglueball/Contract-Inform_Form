@@ -3,12 +3,12 @@ server:
     uri-encoding: UTF-8
     max-threads: 1000
     min-spare-threads: 30
-  port: 8099
+  port: 8709
   servlet:
     context-path: /
 spring:
   profiles:
-    active: prod
+    active: dev
 ---
 spring:
   profiles: dev

@@ -25,17 +25,17 @@ public class CashFlowServiceImpl extends ServiceImpl<CashFlowMapper, CashFlow> i
     private ContractMapper contractMapper;
 
     @Override
-    public boolean save(CashFlowForm cashFlowForm) {
-        int count = cashFlowMapper.queryByProjectNumber(cashFlowForm.getProjectNumber());
+    public boolean save(List<CashFlow> cashFlowList) {
+        int count = cashFlowMapper.queryByProjectNumber(cashFlowList.get(0).getProjectNumber());
         if (count > 0) {
             Map<String, Object> columnMap = new HashMap<String, Object>();
-            columnMap.put("project_number", cashFlowForm.getProjectNumber());
+            columnMap.put("project_number", cashFlowList.get(0).getProjectNumber());
             cashFlowMapper.deleteByMap(columnMap);
         }
-        List<CashFlow> cashFlowList = cashFlowForm.getCashFlowList();
-        cashFlowList.stream().forEach(item -> {
-            item.setProjectNumber(cashFlowForm.getProjectNumber());
-        });
+//        List<CashFlow> cashFlowList = cashFlowForm.getCashFlowList();
+//        cashFlowList.stream().forEach(item -> {
+//            item.setProjectNumber(cashFlowForm.getProjectNumber());
+//        });
         cashFlowMapper.insertCashFlowList(cashFlowList);
         return false;
     }

@@ -5,9 +5,11 @@ import com.contract.inform.modules.cashflow.entity.CashFlow;
 import com.contract.inform.modules.cashflow.form.ContractCashView;
 import com.contract.inform.modules.cashflow.form.CashFlowForm;
 
+import java.util.List;
+
 public interface CashFlowService extends IService<CashFlow> {
 
-    boolean save(CashFlowForm cashFlowForm);
+    boolean save(List<CashFlow> cashFlowList);
 
     ContractCashView getCashByContract(String projectNumber);
 

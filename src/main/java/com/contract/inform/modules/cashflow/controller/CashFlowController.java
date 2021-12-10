@@ -2,15 +2,16 @@ package com.contract.inform.modules.cashflow.controller;
 
 
 import com.contract.inform.common.utils.R;
+import com.contract.inform.modules.cashflow.entity.CashFlow;
 import com.contract.inform.modules.cashflow.form.ContractCashView;
 import com.contract.inform.modules.cashflow.form.CashFlowForm;
 import com.contract.inform.modules.cashflow.service.CashFlowService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/cashflow")
@@ -24,14 +25,15 @@ public class CashFlowController {
      */
     @PostMapping("/save")
 //    @RequiresPermissions("")
-    public R save(@RequestBody CashFlowForm cashFlowForm) {
-        cashFlowService.save(cashFlowForm);
+    public R save(@RequestBody List<CashFlow> cashFlowList) {
+        cashFlowService.save(cashFlowList);
         return R.ok();
     }
 
-    @PostMapping("/cashOfContract")
+    @GetMapping("/cashOfContract")
 //    @RequiresPermissions("")
-    public R getCashByContract(@RequestBody String projectNumber) {
+    public R getCashByContract(@RequestParam Map<String, Object> params) {
+        String projectNumber = (String) params.get("projectNumber");
         ContractCashView contractCashView = cashFlowService.getCashByContract(projectNumber);
         return R.ok().put("data", contractCashView);
     }

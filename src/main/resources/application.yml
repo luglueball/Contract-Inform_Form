@@ -8,7 +8,7 @@ server:
     context-path: /
 spring:
   profiles:
-    active: dev
+    active: prod
 ---
 spring:
   profiles: dev

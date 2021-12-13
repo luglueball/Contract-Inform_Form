@@ -32,7 +32,7 @@
         SELECT
             c.project_number as projectNumber,
             c.project_name as projectName,
-            st.stage as stage,
+            cf.stage as stage,
             st.agency as agency,
             h.accumulated_actual_charges as accumulatedActualCharges,
             h.accumulated_actual_payment as accumulatedActualPayment,
@@ -53,8 +53,8 @@
            st.unplanned_payment   as unplannedPayment
         FROM contract c
         left join sum_table_inputs st on c.project_number = st.project_number
-        left join cash_flow cf on c.project_number = cf.project_number and st.stage = cf.stage
-        left join income_outcome_history h on c.project_number = h.project_number and st.stage = h.stage
+        left join cash_flow cf on c.project_number = cf.project_number
+        left join income_outcome_history h on c.project_number = h.project_number and cf.stage = h.stage
         where
             (c.project_number, version)
              IN

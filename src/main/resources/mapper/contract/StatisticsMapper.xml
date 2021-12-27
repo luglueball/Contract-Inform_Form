@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+        namespace="com.contract.inform.modules.statistics.dao.StatisticsMapper">
+    <cache-ref
+            namespace="com.contract.inform.modules.statistics.dao.StatisticsMapper" />
+    <select id="stasticsInOutcomeByProject"
+            resultType="com.contract.inform.modules.statistics.form.ProjectInOutForm">
+        SELECT
+            cf.stage as stage,
+            sum(cf.cumulate_income) as cumulateIncome,
+            sum(cf.cumulate_outcome) as cumulateOutcome,
+            sum(i.accumulated_actual_charges) as accumulatedActualCharges,
+            sum(i.accumulated_actual_payment) as accumulatedActualPayment
+        FROM
+            cash_flow cf
+            left join income_outcome_history i
+            on i.project_number = cf.project_number and i.stage = cf.stage
+        where
+           cf.project_number in
+        <foreach collection="projectNumbers" item="item" index="no" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+        group by cf.stage
+    </select>
+</mapper>

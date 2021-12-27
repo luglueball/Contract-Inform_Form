@@ -3,9 +3,7 @@ package com.contract.inform.modules.sumtable.controller;
 
 import com.contract.inform.common.utils.PageUtils;
 import com.contract.inform.common.utils.R;
-import com.contract.inform.modules.history.entity.IncomeOutcomeHistory;
 import com.contract.inform.modules.history.form.ProjectHistoryView;
-import com.contract.inform.modules.history.service.HistoryService;
 import com.contract.inform.modules.sumtable.entity.SumtableInputs;
 import com.contract.inform.modules.sumtable.service.SumtableService;
 import io.swagger.annotations.Api;
@@ -17,7 +15,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sumtable")
 @Api(description = "总表接口")
-public class sumtableController {
+public class SumtableController {
     @Autowired
     private SumtableService sumtableService;
 

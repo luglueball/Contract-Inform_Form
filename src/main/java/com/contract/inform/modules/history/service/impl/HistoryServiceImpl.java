@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -46,18 +48,58 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
 
     @Override
     public boolean save(IncomeOutcomeHistory incomeOutcomeHistory) {
-        IncomeOutcomeHistory queryResult =
+        IncomeOutcomeHistory queryResultOfCurrentMonth =
                 historyMapper.queryHistoryByProjectNumber(incomeOutcomeHistory.getProjectNumber(),
                         incomeOutcomeHistory.getStage());
-        if (queryResult == null ) {
+        String lastMonth =  getLastMonth();
+        IncomeOutcomeHistory queryResultOfLastMonth =
+                historyMapper.queryHistoryByProjectNumber(incomeOutcomeHistory.getProjectNumber(),
+                        lastMonth);
+        float currAccumulatedActualCharges = 0;
+        float accumulatedActualPayment = 0;
+        if (queryResultOfCurrentMonth == null ) {
             Date d = new Date();
             SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String createTime = dateformat.format(d);
+            if (queryResultOfLastMonth == null) {
+                currAccumulatedActualCharges = incomeOutcomeHistory.getCurrentCharge();
+                accumulatedActualPayment = incomeOutcomeHistory.getCurrentPayment();
+            } else {
+                currAccumulatedActualCharges = queryResultOfLastMonth.getAccumulatedActualCharges() +
+                        incomeOutcomeHistory.getCurrentCharge();
+                accumulatedActualPayment = queryResultOfLastMonth.getAccumulatedActualPayment() +
+                        incomeOutcomeHistory.getCurrentPayment();
+            }
             incomeOutcomeHistory.setStage(createTime.substring(0,7));
+            incomeOutcomeHistory.setAccumulatedActualCharges(currAccumulatedActualCharges);
+            incomeOutcomeHistory.setAccumulatedActualPayment(accumulatedActualPayment);
             historyMapper.insert(incomeOutcomeHistory);
         } else {
+            if (queryResultOfLastMonth == null) {
+                currAccumulatedActualCharges = incomeOutcomeHistory.getCurrentCharge();
+                accumulatedActualPayment = incomeOutcomeHistory.getCurrentPayment();
+            } else {
+                currAccumulatedActualCharges = queryResultOfLastMonth.getAccumulatedActualCharges() +
+                        incomeOutcomeHistory.getCurrentCharge();
+                accumulatedActualPayment = queryResultOfLastMonth.getAccumulatedActualPayment() +
+                        incomeOutcomeHistory.getCurrentPayment();
+            }
+            incomeOutcomeHistory.setAccumulatedActualCharges(currAccumulatedActualCharges);
+            incomeOutcomeHistory.setAccumulatedActualPayment(accumulatedActualPayment);
             historyMapper.updateByProject(incomeOutcomeHistory);
         }
         return false;
     }
+
+    private String getLastMonth (){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date); // 设置为当前时间
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1); // 设置为上一个月
+        date = calendar.getTime();
+        String accDate = format.format(date);
+        return accDate;
+    }
+
 }

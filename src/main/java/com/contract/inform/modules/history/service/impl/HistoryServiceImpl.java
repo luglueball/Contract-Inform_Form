@@ -51,16 +51,16 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
         IncomeOutcomeHistory queryResultOfCurrentMonth =
                 historyMapper.queryHistoryByProjectNumber(incomeOutcomeHistory.getProjectNumber(),
                         incomeOutcomeHistory.getStage());
-        String lastMonth =  getLastMonth();
+        String lastMonth =  getLastMonth(incomeOutcomeHistory.getStage());
         IncomeOutcomeHistory queryResultOfLastMonth =
                 historyMapper.queryHistoryByProjectNumber(incomeOutcomeHistory.getProjectNumber(),
                         lastMonth);
         float currAccumulatedActualCharges = 0;
         float accumulatedActualPayment = 0;
         if (queryResultOfCurrentMonth == null ) {
-            Date d = new Date();
-            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String createTime = dateformat.format(d);
+//            Date d = new Date();
+//            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String createTime = dateformat.format(d);
             if (queryResultOfLastMonth == null) {
                 currAccumulatedActualCharges = incomeOutcomeHistory.getCurrentCharge();
                 accumulatedActualPayment = incomeOutcomeHistory.getCurrentPayment();
@@ -70,7 +70,7 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
                 accumulatedActualPayment = queryResultOfLastMonth.getAccumulatedActualPayment() +
                         incomeOutcomeHistory.getCurrentPayment();
             }
-            incomeOutcomeHistory.setStage(createTime.substring(0,7));
+            incomeOutcomeHistory.setStage(incomeOutcomeHistory.getStage());
             incomeOutcomeHistory.setAccumulatedActualCharges(currAccumulatedActualCharges);
             incomeOutcomeHistory.setAccumulatedActualPayment(accumulatedActualPayment);
             historyMapper.insert(incomeOutcomeHistory);
@@ -91,15 +91,19 @@ public class HistoryServiceImpl extends ServiceImpl<HistoryMapper, IncomeOutcome
         return false;
     }
 
-    private String getLastMonth (){
+    private String getLastMonth (String stage){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
-        Date date = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date); // 设置为当前时间
-        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1); // 设置为上一个月
-        date = calendar.getTime();
-        String accDate = format.format(date);
-        return accDate;
+        try {
+            Date sourceDate = format.parse(stage);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(sourceDate); // 设置为当前时间
+            calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1); // 设置为上一个月
+            String accDate = format.format(calendar.getTime());
+            return accDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

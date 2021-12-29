@@ -9,6 +9,7 @@
             parameterType="com.contract.inform.modules.sumtable.entity.SumtableInputs">
         update sum_table_inputs
         <set>
+            <if test="agency != null">agency = #{agency},</if>
             <if test="paymentBeforeRemittance != null">payment_before_remittance = #{paymentBeforeRemittance},</if>
             <if test="paymentAfterRemittance != null">payment_after_remittance = #{paymentAfterRemittance},</if>
             <if test="unplannedCharges != null">unplanned_charges = #{unplannedCharges},</if>

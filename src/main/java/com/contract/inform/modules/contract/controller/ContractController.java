@@ -50,4 +50,12 @@ public class ContractController {
         return R.ok().put("data", data);
     }
 
+    @GetMapping("/detail")
+//    @RequiresPermissions("")
+    public R getContractDetail(@RequestParam String projectNumber) {
+        Contract data = contractService.getContractDetail(projectNumber);
+
+        return R.ok().put("data", data);
+    }
+
 }

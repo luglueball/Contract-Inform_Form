@@ -15,4 +15,6 @@ public interface ContractService extends IService<Contract> {
     IPage<Contract> queryPage(Map<String, Object> params);
 
     List<ContractBase> listProjectName(Map<String, Object> params);
+
+    Contract getContractDetail(String projectNumber);
 }

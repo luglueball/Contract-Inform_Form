@@ -43,6 +43,13 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
     }
 
     @Override
+    public Contract getContractDetail(String projectNumber) {
+        Contract contract = contractMapper.queryByProjectNumber(projectNumber);
+        return contract;
+    }
+
+
+    @Override
     public boolean save(Contract contract) {
         Contract queryResult = contractMapper.queryByProjectNumber(contract.getProjectNumber());
         if (queryResult != null && queryResult.getVersion() > 0 ) {

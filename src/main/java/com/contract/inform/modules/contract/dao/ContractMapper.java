@@ -22,4 +22,5 @@ public interface ContractMapper extends BaseMapper<Contract> {
     IPage<Contract> listContract(@Param("page")Page<Contract> page, @Param("projectName")String projectName);
 
     List<ContractBase> listProjectName(@Param("projectName")String projectName);
+
 }
